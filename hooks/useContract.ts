@@ -10,7 +10,13 @@ export default function useContract<T extends Contract = Contract>(
 
   return useMemo(() => {
     if (!address || !ABI || !library || !chainId) {
+      console.log('adress is:', address)
+      console.log('ABI is:', ABI)
+      console.log('library is:', library)
+      console.log('chainId is:', chainId)
+
       return null;
+
     }
 
     try {

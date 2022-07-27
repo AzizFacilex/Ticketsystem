@@ -1,8 +1,20 @@
 import React from "react";
 import AvailableTickets from "./AvailableTickets";
 import TicketCreation from "./TicketCreation";
-
+import { useWeb3React } from "@web3-react/core";
+import type { Web3Provider } from "@ethersproject/providers";
+import TICKETS_ABI from "../../build/contracts/EventFactory.json";
+import useMyContract from "../../hooks/useMyContract";
+import type { EventFactory } from "../../contracts/types/EventFactory";
 const Tickets = () => {
+  const { account } = useWeb3React<Web3Provider>();
+  const contract = useMyContract();
+  async function getTokenBalance(contract: EventFactory) {
+
+    const balanceTxt = await contract.deployedEvents;
+    return balanceTxt[0];
+    ;
+  }
   return (
     <div
       className="bg-gradient-to-b from-white-300 to-white-500 w-full py-14"
@@ -19,7 +31,8 @@ const Tickets = () => {
             oder Festivals.
           </p>
           <div className="w-full flex flex-col py-12">
-            <AvailableTickets />
+
+            <AvailableTickets account={account} contract={contract} />
           </div>
         </div>
         <div className="hidden sm:block" aria-hidden="true" >

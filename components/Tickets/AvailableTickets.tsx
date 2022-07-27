@@ -6,13 +6,16 @@ import Image from "next/image";
 import Stars from "../../public/assets/Icon/stars.svg";
 import ArrowBack from "../../public/assets/Icon/eva_arrow-back-fill.svg";
 import ArrowNext from "../../public/assets/Icon/eva_arrow-next-fill.svg";
-import { useWeb3React } from "@web3-react/core";
-import type { Web3Provider } from "@ethersproject/providers";
+import { EventFactory } from "../../contracts/types";
 
 
 const AvailableTickets = ({
+  account,
+  contract
+}
+) => {
 
-  availableTickets = [
+  var availableTickets = [
     {
       name: "X Festival",
       image: "/assets/people-3.png",
@@ -78,8 +81,7 @@ const AvailableTickets = ({
       testimoni:
         "Wow... I am very happy to use this VPN, it turned out to be more than my expectations and so far there have been no problems. LaslesVPN always the best",
     },
-  ],
-}) => {
+  ]
   const settings = {
     dots: true,
     customPaging: function (i) {
@@ -113,7 +115,6 @@ const AvailableTickets = ({
     ],
   };
   const [sliderRef, setSliderRef] = useState(null);
-  const { account } = useWeb3React<Web3Provider>();
 
   return (
     <>
